@@ -167,4 +167,4 @@ def submit_solution(id):
     return render_template('result.html', scenario=dict(scenario), success=success, feedback=feedback)
 
 if __name__ == '__main__':
-    app.run(debug=True, host="0.0.0.0", port=50005)
+    app.run(debug=True, host="0.0.0.0", port=5000)
