@@ -61,11 +61,11 @@ pipeline {
                         if (env.BRANCH_NAME == 'dev') {
                             sh "sed -i 's/NAMESPACE/dev/g' deploy.yaml"
                             sh "sed -i 's/NAMESPACE/dev/g' svc.yaml"
-                            sh "sed -i 's|IMAGE_NAME${IMAGE_NAME}:${IMAGE_TAG}|g' deploy.yaml"
+                            sh "sed -i 's|IMAGE_NAME|${IMAGE_NAME}:${IMAGE_TAG}|g' deploy.yaml"
                         } else if (env.BRANCH_NAME == 'prod') {
                             sh "sed -i 's/NAMESPACE/prod/g' deploy.yaml"
                             sh "sed -i 's/NAMESPACE/prod/g' svc.yaml"
-                            sh "sed -i 's|IMAGE_NAME${IMAGE_NAME}:${IMAGE_TAG}|g' deploy.yaml"
+                            sh "sed -i 's|IMAGE_NAME|${IMAGE_NAME}:${IMAGE_TAG}|g' deploy.yaml"
                         }
                     }
                 }
