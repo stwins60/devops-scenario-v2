@@ -32,7 +32,7 @@ pipeline {
                     docker run --rm \
                     -v $(pwd):/workspace \
                     -w /workspace \
-                    aquasec/trivy:latest \
+                    aquasec/trivy:0.69.3-amd64 \
                     image ${IMAGE_NAME}:${IMAGE_TAG} \
                     --format template \
                     --template "@html.tpl" \
