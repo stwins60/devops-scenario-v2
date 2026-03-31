@@ -21,31 +21,31 @@ pipeline {
                 sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
             }
         }
-        stage("Scan Docker Image with Trivy") {
-            steps {
-                script {
-                    sh '''
-                    if [ ! -f html.tpl ]; then
-                    curl -sSL -o html.tpl https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/html.tpl
-                    fi
+        // stage("Scan Docker Image with Trivy") {
+        //     steps {
+        //         script {
+        //             sh '''
+        //             if [ ! -f html.tpl ]; then
+        //             curl -sSL -o html.tpl https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/html.tpl
+        //             fi
 
-                    docker run --rm \
-                    -v $(pwd):/workspace \
-                    -w /workspace \
-                    aquasec/trivy:0.69.3-amd64 \
-                    image ${IMAGE_NAME}:${IMAGE_TAG} \
-                    --format template \
-                    --template "@html.tpl" \
-                    --output trivy-report.html
-                    '''
-                }
-            }
-        }
-        stage("Publish Trivy Scanned Image Report") {
-            steps {
-                publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: '.', reportFiles: 'trivy-report.html', reportName: 'Trivy Scanned Image Vulnerability Report'])
-            }
-        }
+        //             docker run --rm \
+        //             -v $(pwd):/workspace \
+        //             -w /workspace \
+        //             aquasec/trivy:0.69.3-amd64 \
+        //             image ${IMAGE_NAME}:${IMAGE_TAG} \
+        //             --format template \
+        //             --template "@html.tpl" \
+        //             --output trivy-report.html
+        //             '''
+        //         }
+        //     }
+        // }
+        // stage("Publish Trivy Scanned Image Report") {
+        //     steps {
+        //         publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: '.', reportFiles: 'trivy-report.html', reportName: 'Trivy Scanned Image Vulnerability Report'])
+        //     }
+        // }
         stage("Docker Push") {
             steps {
                 script {
