@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: devops-scenario-v2
+  name: devops-scenario-v2
+  namespace: NAMESPACE
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: devops-scenario-v2
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: devops-scenario-v2
+    spec:
+      containers:
+      - image: IMAGE_NAME
+        name: devops-scenario-v2-image
+        ports:
+        - containerPort: 5000
