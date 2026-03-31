@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="max-width: 800px; margin: 0 auto;">
+    <h1 style="margin-bottom: 2rem;">Account Settings</h1>
+    
+    <div class="glass-card" style="margin-bottom: 2rem;">
+        <h3>Profile</h3>
+        <p style="margin-bottom: 2rem;">Update your personal information.</p>
+        
+        <form action="/settings" method="POST">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" name="name" class="form-control" value="{{ session.get('user_name', '') }}" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Profile</button>
+        </form>
+    </div>
+
+    <div class="glass-card">
+        <h3>AWS Integration</h3>
+        <p style="margin-bottom: 2rem;">Connect your AWS account via environment variables (<code>AWS_ACCESS_KEY_ID</code>, <code>AWS_SECRET_ACCESS_KEY</code>) to enable true Amazon Bedrock AI scenario generation.</p>
+        <p><strong><span style="color:var(--success)">System Status</span></strong>: Env Variables active. Running model <code>anthropic.claude-3-haiku-20240307-v1:0</code>.</p>
+    </div>
+</div>
+{% endblock %}

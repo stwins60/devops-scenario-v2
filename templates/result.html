@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="glass-card result-card">
+    <div class="icon-large">
+        {% if success %}🎉{% else %}❌{% endif %}
+    </div>
+    
+    <h1 style="color: {{ 'var(--success)' if success else 'var(--danger)' }}">{{ 'Scenario Solved!' if success else 'Evaluation Failed' }}</h1>
+    
+    <div style="margin: 2rem 0;">
+        <h3>AI Feedback</h3>
+        <p style="font-size: 1.1rem;">{{ feedback }}</p>
+    </div>
+    
+    <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center;">
+        <a href="/scenario/{{ scenario.id }}" class="btn" style="background: rgba(255,255,255,0.1); color: #fff;">Review Scenario</a>
+        <a href="/" class="btn btn-primary">Back to Dashboard</a>
+    </div>
+</div>
+{% endblock %}

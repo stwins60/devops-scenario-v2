@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="margin-bottom: 1.5rem;">
+    <a href="/dashboard" class="btn btn-outline" style="font-size: 0.85rem; padding: 0.5rem 1rem;">&larr; Back to Dashboard</a>
+</div>
+<div class="glass-card" style="margin-bottom: 2rem;">
+    <div class="scenario-header">
+        <h1 style="margin-bottom: 0;">{{ scenario.title }}</h1>
+        <div class="tags" style="margin-bottom: 0;">
+            <span class="badge {{ 'badge-warning' if scenario.difficulty == 'Medium' else 'badge-danger' if scenario.difficulty == 'Hard' else '' }}">{{ scenario.difficulty }}</span>
+            <span class="badge">{{ scenario.language }}</span>
+            <span class="badge">{{ scenario.issue_type }}</span>
+        </div>
+    </div>
+    
+    <div style="margin: 2rem 0;">
+        <h3>Problem Description</h3>
+        <p>{{ scenario.description }}</p>
+    </div>
+
+    <div style="margin: 2rem 0;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <h3>Application Code</h3>
+        </div>
+        <pre><code>{{ scenario.code_snippet }}</code></pre>
+    </div>
+</div>
+
+<div class="glass-card">
+    <h3>Submit Your Solution</h3>
+    <p>Fix the code or describe your deployment strategy to resolve the issue.</p>
+    
+    <form action="/submit/{{ scenario.id }}" method="POST">
+        <textarea name="solution" class="form-control" placeholder="Paste your corrected code or write your solution here..." required></textarea>
+        <button type="submit" class="btn btn-success" style="margin-top: 1rem;">Evaluate Solution</button>
+    </form>
+</div>
+{% endblock %}

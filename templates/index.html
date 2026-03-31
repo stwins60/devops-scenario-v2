@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 1rem;">
+    <div>
+        <h1>Welcome, {{ session.get('user_name', 'Student') }}!</h1>
+        <p style="margin-bottom:0;">Pick an active scenario below to begin your training.</p>
+    </div>
+</div>
+
+<div class="grid">
+    {% for scenario in scenarios %}
+    <div class="glass-card">
+        <div class="scenario-header">
+            <h3>{{ scenario.title }}</h3>
+            <span class="badge {{ 'badge-warning' if scenario.difficulty == 'Medium' else 'badge-danger' if scenario.difficulty == 'Hard' else '' }}">{{ scenario.difficulty }}</span>
+        </div>
+        <div class="tags" style="margin-bottom: 1.5rem;">
+            <span class="badge" style="background: rgba(255,255,255,0.1); color: #fff; border:none;">{{ scenario.language }}</span>
+            {% for tag in scenario.tags %}
+                {% if tag != scenario.language|lower %}
+                    <span class="badge" style="background: rgba(255,255,255,0.1); color: #fff; border:none;">{{ tag }}</span>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <p style="font-size: 0.95rem; margin-bottom: 2rem;">{{ scenario.description }}</p>
+        <div>
+            <a href="/scenario/{{ scenario.id }}" class="btn btn-primary" style="width: 100%; text-align: center; display: block;">Solve Scenario</a>
+        </div>
+    </div>
+    {% else %}
+    <div class="glass-card empty-state">
+        <div class="floating-icon" style="font-size: 4rem; margin-bottom: 1rem;">🔭</div>
+        <h3>No Scenarios Available</h3>
+        <p>Your dashboard is currently empty. Please wait for an Admin to dispatch new training scenarios.</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
