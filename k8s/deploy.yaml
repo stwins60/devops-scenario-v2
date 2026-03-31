@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: devops-scenario-v2
+    owner: Idris
   name: devops-scenario-v2
   namespace: NAMESPACE
 spec:
